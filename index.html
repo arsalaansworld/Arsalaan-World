@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arsalaan's World</title>
+    <style>
+        body { background: #000; color: #0f0; font-family: monospace; padding: 20px; }
+        #game-text { white-space: pre-wrap; margin-bottom: 20px; font-size: 18px; }
+        input { background: #000; border: none; color: #0f0; outline: none; font-family: monospace; font-size: 18px; width: 100%; }
+        .cursor { border-left: 8px solid #0f0; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body>
+    <div id="game-text"></div>
+    <div style="display: flex;">
+        <span>> </span><input type="text" id="user-input" autofocus>
+    </div>
+
+    <script>
+        const textElement = document.getElementById('game-text');
+        const inputElement = document.getElementById('user-input');
+
+        function type(msg) {
+            textElement.innerHTML += msg + "\n";
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+
+        type("------------------------------");
+        type("WELCOME TO ARSALAAN'S WORLD...");
+        type("------------------------------");
+        type("\nYou wake up in a dark, digital neon room.");
+        type("In front of you are two glowing doors: [BLUE] or [RED].");
+
+        inputElement.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const val = inputElement.value.toLowerCase();
+                inputElement.value = '';
+                type("> " + val);
+
+                if (val.includes('blue')) {
+                    type("\nYou entered the Path of Wisdom. You found a legendary diamond! 💎");
+                    type("YOU WIN, ARSALAAN!");
+                } else if (val.includes('red')) {
+                    type("\nOh no! The Red door was a trap. A digital virus caught you!");
+                    type("GAME OVER.");
+                } else {
+                    type("\nInvalid choice. The world is glitching...");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
